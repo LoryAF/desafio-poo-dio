@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Mentoria extends Conteudo{
 
+    private String tutor;
     private LocalDate data;
 
     @Override
@@ -12,6 +13,14 @@ public class Mentoria extends Conteudo{
     }
 
     public Mentoria() {
+    }
+
+    public String getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(String tutor) {
+        this.tutor = tutor;
     }
 
     public LocalDate getData() {
@@ -24,10 +33,10 @@ public class Mentoria extends Conteudo{
 
     @Override
     public String toString() {
-        return "Mentoria{" +
-                "titulo='" + getTitulo() + '\'' +
-                ", descricao='" + getDescricao() + '\'' +
-                ", data=" + data +
-                '}';
+        return "\n- Mentoria:" +
+                "\nTutor = '" + getTutor() + '\'' +
+                "\nTitulo = '" + getTitulo() + '\'' +
+                "\nDescricao = '" + getDescricao() + '\'' +
+                "\ndata = " + data;
     }
 }

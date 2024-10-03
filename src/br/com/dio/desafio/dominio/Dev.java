@@ -22,6 +22,49 @@ public class Dev {
         }
     }
 
+    public void exibirProgresso() {
+        int totalConcluidos = this.conteudosConcluidos.size();
+        int totalInscritos = this.conteudosInscritos.size();
+        System.out.println("Progresso de " + this.nome + ":");
+        System.out.println("Conteúdos Concluídos: " + totalConcluidos);
+        System.out.println("Conteúdos Inscritos: " + totalInscritos);
+        System.out.println("XP:" + calcularTotalXp());
+    }
+
+    public void exibirConteudosInscritos() {
+        System.out.println("Conteúdos inscritos de " + this.nome + ":");
+        this.conteudosInscritos.forEach(conteudo -> System.out.println(conteudo.getTitulo()));
+    }
+
+    public void exibirConteudosConcluidos() {
+        System.out.println("Conteúdos concluídos de " + this.nome + ":");
+        this.conteudosConcluidos.forEach(conteudo -> System.out.println(conteudo.getTitulo()));
+    }
+
+    public void cancelarInscricaoConteudo(Conteudo conteudo) {
+        if (this.conteudosConcluidos.contains(conteudo)) {
+            System.err.println("Não é possível cancelar a inscrição em um conteúdo já concluído!");
+            return;
+        }
+        if (this.conteudosInscritos.contains(conteudo)) {
+            this.conteudosInscritos.remove(conteudo);
+            System.out.println("Inscrição de " + getNome() + " cancelada no conteúdo: " + conteudo.getTitulo());
+        } else {
+            System.err.println("Você não está inscrito nesse conteúdo!");
+        }
+    }
+
+    public void cancelarInscricaoBootcamp(Bootcamp bootcamp) {
+        int conteudosCancelados = bootcamp.getConteudos().size();
+        if (this.conteudosInscritos.removeAll(bootcamp.getConteudos())) {
+            bootcamp.getDevsInscritos().remove(this);
+            System.out.println("Inscrição de " + getNome() + " cancelada no Bootcamp: " + bootcamp.getNome() +
+                    ". Total de conteúdos removidos: " + conteudosCancelados);
+        } else {
+            System.err.println("Você não estava inscrito neste Bootcamp.");
+        }
+    }
+
     public double calcularTotalXp() {
         Iterator<Conteudo> iterator = this.conteudosConcluidos.iterator();
         double soma = 0;
